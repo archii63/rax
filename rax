@@ -102,36 +102,5 @@ KitError:
   trace: {
     balance: "0",
     walletAddress: "<ownerAdapter wallet address>",
-    chain: "Ethereum",
-  },
-}
-import { AppKit, KitError } from "@circle-fin/app-kit"
-
-const kit = new AppKit()
-
-try {
-  const result = await kit.unifiedBalance.spend(params)
-  console.log("Success:", result.txHash)
-} catch (error) {
-  if (
-    error instanceof KitError &&
-    error.recoverability === "RESUMABLE" &&
-    error.cause?.trace
-  ) {
-    const { attestation, signature } = error.cause.trace as {
-      attestation: string
-      signature: string
-    }
-
-    const retryResult = await kit.unifiedBalance.spend({
-      ...params,
-      config: {
-        retry: { attestation, signature },
-      },
-    })
-
-    console.log("Retry success:", retryResult.txHash)
-  } else {
-    throw error
-  }
+ 
 }
