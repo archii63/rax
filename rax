@@ -10,13 +10,6 @@ const params = {
   },
 }
 
-const estimate = await kit.unifiedBalance.estimateSpend(params)
-
-const feeSummary = {
-  providerFee: estimate.fees.find((fee) => fee.type === "provider")?.amount ?? "0",
-  gasFee: estimate.fees.find((fee) => fee.type === "gasFee")?.amount ?? "0",
-  forwarderFee: estimate.fees.find((fee) => fee.type === "forwarder")?.amount ?? "0",
-}
 
 console.log(feeSummary)
 // ​​{
@@ -68,12 +61,13 @@ const estimate = await kit.unifiedBalance.estimateSpend({
     ],
   },
   {
-    type: "kit",
-    token: "USDC",
-    amount: "1.000000",
-    allocations: [{ chain: "Arc_Testnet", amount: "1.000000" }],
-    recipientAddress: "<EVM_FEE_RECIPIENT>",
-  },
+const estimate = await kit.unifiedBalance.estimateSpend(params)
+
+const feeSummary = {
+  providerFee: estimate.fees.find((fee) => fee.type === "provider")?.amount ?? "0",
+  gasFee: estimate.fees.find((fee) => fee.type === "gasFee")?.amount ?? "0",
+  forwarderFee: estimate.fees.find((fee) => fee.type === "forwarder")?.amount ?? "0",
+}
 ]
 const delegateConfig = {
   from: { adapter: ownerAdapter, chain: "Ethereum" },
